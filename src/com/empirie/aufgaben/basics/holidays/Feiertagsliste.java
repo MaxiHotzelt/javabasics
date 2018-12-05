@@ -14,7 +14,7 @@ public class Feiertagsliste {
 		feiertagslisteAnlegen(jahr);
 	}
 	
-	public ArrayList<Feiertag> getAlleFeiertage() {
+	public ArrayList<Feiertag> getFeiertage() {
 		return alleFeiertage;
 	}
 	
@@ -29,7 +29,7 @@ public class Feiertagsliste {
 		GregorianCalendar _fronleichnam = new GregorianCalendar();
 		GregorianCalendar _bussUndBettag = new GregorianCalendar();
 		
-		_ostersonntag = berechneOsterdatum(jahr);
+		_ostersonntag = osterdatumBerechnen(jahr);
 		
 		_gruendonnerstag.setTime(_ostersonntag.getTime());
 		_gruendonnerstag.add(Calendar.DATE, -3);
@@ -102,7 +102,7 @@ public class Feiertagsliste {
 		alleFeiertage.add(zweiterWeihnachtstag);
 	}
 	
-	private GregorianCalendar berechneOsterdatum(int jahr) {
+	private GregorianCalendar osterdatumBerechnen(int jahr) {
 		int a = jahr % 19;
 		int b = jahr / 100;
 		int c = jahr % 100;

@@ -13,7 +13,7 @@ public class Brueckentagsliste {
 	}
 	
 	private void brueckentagslisteAnlegen(Feiertagsliste alleFeiertage) {
-		for (Feiertag feiertag : alleFeiertage.getAlleFeiertage()) {
+		for (Feiertag feiertag : alleFeiertage.getFeiertage()) {
 			if(feiertag.getDatum().get(Calendar.DAY_OF_WEEK) > 1 && feiertag.getDatum().get(Calendar.DAY_OF_WEEK) < 7) {
 				Brueckentag brueckentag = new Brueckentag(feiertag);
 				alleBrueckentage.add(brueckentag);
