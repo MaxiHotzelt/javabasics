@@ -1,65 +1,70 @@
 package com.empirie.aufgaben.basics.holidays;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Scanner;
 
 public class Main {
 	
-	private static ArrayList<Brueckentag> alleBrueckentage = new ArrayList<Brueckentag>();
+	
 	
 	public static void main(String[] args) {
 		
-		Feiertagsliste feiertage2018 = new Feiertagsliste(2018);
-		feiertage2018.feiertageAusgeben();
+		hauptmenu();
 		
-		for (Feiertag feiertag : feiertage2018.getAlleFeiertage()) {
-			if(feiertag.getDatum().get(Calendar.DAY_OF_WEEK) > 1 && feiertag.getDatum().get(Calendar.DAY_OF_WEEK) < 7) {
-				Brueckentag brueckentag = new Brueckentag(feiertag);
-				alleBrueckentage.add(brueckentag);
-			}
-		}
-		
-		
-		brueckentageAusgeben();
+//		Feiertagsliste feiertage2018 = new Feiertagsliste(2018);
+//		feiertage2018.feiertageAusgeben();
+//		
+//		Brueckentagsliste brueckentage2018 = new Brueckentagsliste(feiertage2018);
+//		brueckentage2018.brueckentageAusgeben();
 		
 	}
 	
-	
-	public static void brueckentageAusgeben() {
-		java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd.MM.yyyy");
-		java.text.SimpleDateFormat dateFormatYear = new java.text.SimpleDateFormat("yyyy");
-		java.text.SimpleDateFormat dateFormatDay = new java.text.SimpleDateFormat("EEEE");
+	public static void hauptmenu() {
+		Scanner sc = new Scanner(System.in);
+		Feiertagsliste feiertage;
+		int option = 1; 
+		int jahr;
 		
 		
-		System.out.println(MessageFormat.format("\n--- Brückentage für das Jahr {0} ---", 
-				dateFormatYear.format(alleBrueckentage.get(0).getDatum().getTime())));
-		
-		
-		for(int i = 0; i < alleBrueckentage.size(); i++) {
+		while(option != 3) {
+			System.out.print("\n\n----- Feier- und Brückentage ----- \n"
+					+ "----------- Hauptmenü ----------\n\n"
+					+ "<1>: Feiertage ausgeben \n"
+					+ "<2>: Brückentage ausgeben \n"
+					+ "<3>: Programm beenden \n\n"
+					+ "Wähle eine Option: ");
 			
-			System.out.println(MessageFormat.format(
-					"\n---------- Brückentag {0} ----------" +
-					"\n\nName		: {1}" +  
-					"\nDatum		: {2}" +
-					"\nKalenderwoche	: {3}" +
-					"\nWochentag 	: {4}", 
-					i + 1, alleBrueckentage.get(i).getName(), dateFormat.format(alleBrueckentage.get(i).getDatum().getTime()),
-					alleBrueckentage.get(i).getKalenderwoche(), dateFormatDay.format(alleBrueckentage.get(i).getDatum().getTime()))
-			);
 			
-			System.out.print("Bundesland	: ");
+			option = sc.nextInt();
 			
-			for(int j = 0; j < alleBrueckentage.get(i).getBundeslenader().size(); j++) {
-				if(j+1 == alleBrueckentage.get(i).getBundeslenader().size()) {
-					System.out.print(alleBrueckentage.get(i).getBundeslenader().get(j));
-				} else {
-					System.out.print(alleBrueckentage.get(i).getBundeslenader().get(j) + ", ");
-				}
-				
+			switch(option) {
+				case 1:
+					System.out.print("\n\n----- Feiertage ausgeben -----\n\n"
+							+ "Wähle ein Jahr: ");
+					jahr = sc.nextInt();
+					feiertage = new Feiertagsliste(jahr);
+					feiertage.feiertageAusgeben();
+					
+					feiertage = null;
+					break;
+				case 2:
+					System.out.print("\n\n----- Brückentage ausgeben -----\n\n"
+							+ "Wähle ein Jahr: ");
+					jahr = sc.nextInt();
+					feiertage = new Feiertagsliste(jahr);
+					Brueckentagsliste brueckentage = new Brueckentagsliste(feiertage);
+					brueckentage.brueckentageAusgeben();
+					
+					brueckentage = null;
+					break;
+				case 3:
+					break;
+				default:
+					break;
 			}
 			
-			System.out.println("\n");
 		}
+		
+		sc.close();
 	}
+	
 }
