@@ -23,7 +23,6 @@ public abstract class Kalenderwoche {
 		return this.freieTage;
 	}
 	
-	
 	public int urlaubseffizienzBerechnen() {
 		return (int)Math.round((100/(this.arbeitstage + this.freieTage))*this.freieTage);
 	}

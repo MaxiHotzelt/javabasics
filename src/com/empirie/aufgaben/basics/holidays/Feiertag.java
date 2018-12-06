@@ -43,6 +43,5 @@ public class Feiertag {
 	public ArrayList<String> getBundeslenader() {
 		return this.bundeslaender;
 	}
-	
-	
+		
 }

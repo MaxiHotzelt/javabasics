@@ -1,10 +1,12 @@
 package com.empirie.aufgaben.basics.holidays;
 
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Scanner;
 
 public class ListeAllerFeiertage {
 	
@@ -156,5 +158,53 @@ public class ListeAllerFeiertage {
 			
 			System.out.println("\n");
 		}
+	}
+	
+	
+	public void feiertageExportieren() throws IOException {
+		Scanner sc = new Scanner(System.in);
+		String dateiName = System.getProperty("user.home") + "/Desktop/";
+
+		System.out.print("Gib den Dateinamen an: ");
+		dateiName = dateiName.concat(sc.nextLine() + ".csv");
+		
+		
+		CSVUtils csvDatei = new CSVUtils(dateiName);
+		
+		java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd.MM.yyyy");
+		java.text.SimpleDateFormat dateFormatYear = new java.text.SimpleDateFormat("yyyy");
+		java.text.SimpleDateFormat dateFormatDay = new java.text.SimpleDateFormat("EEEE");
+		
+		System.out.println(MessageFormat.format("--- Feiertage für das Jahr {0} ---", 
+				dateFormatYear.format(alleFeiertage.get(0).getDatum().getTime())));
+		
+		csvDatei.schreibeText(MessageFormat.format("--- Feiertage für das Jahr {0} ---", 
+				dateFormatYear.format(alleFeiertage.get(0).getDatum().getTime())));
+		
+		
+		
+		for(int i = 0; i < alleFeiertage.size(); i++) {
+			
+			csvDatei.schreibeText(MessageFormat.format("\r\n---------- Feiertag {0} ----------", i + 1));
+			csvDatei.schreibeText(MessageFormat.format("\r\n\nName;{0}", alleFeiertage.get(i).getName()));
+			csvDatei.schreibeText(MessageFormat.format("\r\nDatum;{0}", dateFormat.format(alleFeiertage.get(i).getDatum().getTime())));
+			csvDatei.schreibeText(MessageFormat.format("\r\nWochentag;{0}", dateFormatDay.format(alleFeiertage.get(i).getDatum().getTime())));
+			
+			
+			csvDatei.schreibeText("\r\nBundesland;");
+			
+			for(int j = 0; j < alleFeiertage.get(i).getBundeslenader().size(); j++) {
+				if(j+1 == alleFeiertage.get(i).getBundeslenader().size()) {
+					csvDatei.schreibeText(alleFeiertage.get(i).getBundeslenader().get(j));
+				} else {
+					csvDatei.schreibeText(alleFeiertage.get(i).getBundeslenader().get(j) + ";");
+				}
+				
+			}
+			
+		}
+		csvDatei.beendeCSV();
+		
+		csvDatei = null;
 	}
 }
