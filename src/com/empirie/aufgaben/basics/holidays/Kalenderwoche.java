@@ -1,15 +1,18 @@
 package com.empirie.aufgaben.basics.holidays;
 
+
+/**
+ * 
+ * @author hotzelm
+ * Ist die Superklasse einer Kalenderwoche mit Brückentagen darin
+ */
 public abstract class Kalenderwoche {
 	protected int arbeitstage;
 	protected int freieTage;
-	protected int urlaubseffizienz;
-	protected int kalenderwoche;
 	
-	protected Kalenderwoche(int kalenderwoche) {
+	protected Kalenderwoche() {
 		this.arbeitstage = 5;
 		this.freieTage = 2;
-		this.kalenderwoche = kalenderwoche;
 	}
 
 	public int getArbeitstage() {
@@ -20,14 +23,9 @@ public abstract class Kalenderwoche {
 		return this.freieTage;
 	}
 	
-	public int getUrlaubseffizienz() {
-		return this.urlaubseffizienz;
-	}
 	
-	public void urlaubseffizienzBerechnen() {
-		this.urlaubseffizienz = (int)Math.floor((100/(this.arbeitstage + this.freieTage))*this.freieTage);
+	public int urlaubseffizienzBerechnen() {
+		return (int)Math.round((100/(this.arbeitstage + this.freieTage))*this.freieTage);
 	}
-
-
 	
 }

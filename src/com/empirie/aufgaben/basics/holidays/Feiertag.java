@@ -3,6 +3,12 @@ package com.empirie.aufgaben.basics.holidays;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+
+/**
+ * 
+ * @author hotzelm
+ * Ist zur Erzeugung von Feiertagen
+ */
 public class Feiertag {
 	protected GregorianCalendar datum = new GregorianCalendar();
 	protected String name;

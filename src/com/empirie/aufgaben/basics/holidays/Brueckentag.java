@@ -2,6 +2,11 @@ package com.empirie.aufgaben.basics.holidays;
 
 import java.util.GregorianCalendar;
 
+/**
+ * 
+ * @author hotzelm
+ * Eine besondere Form eines Feiertags - der Brückentag
+ */
 public class Brueckentag extends Feiertag  {
 	
 	private int kalenderwoche;

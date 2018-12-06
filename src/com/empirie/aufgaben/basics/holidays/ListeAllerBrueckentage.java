@@ -4,15 +4,24 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Brueckentagsliste {
+/**
+ * 
+ * @author hotzelm
+ * Entählt alle Brückentage
+ */
+public class ListeAllerBrueckentage {
 	
 	private  ArrayList<Brueckentag> alleBrueckentage = new ArrayList<Brueckentag>();
 	
-	public Brueckentagsliste(Feiertagsliste alleFeiertage) {
+	public ListeAllerBrueckentage(ListeAllerFeiertage alleFeiertage) {
 		brueckentagslisteAnlegen(alleFeiertage);
 	}
 	
-	private void brueckentagslisteAnlegen(Feiertagsliste alleFeiertage) {
+	public ArrayList<Brueckentag> getAlleBrueckentage() {
+		return alleBrueckentage;
+	}
+	
+	private void brueckentagslisteAnlegen(ListeAllerFeiertage alleFeiertage) {
 		for (Feiertag feiertag : alleFeiertage.getFeiertage()) {
 			if(feiertag.getDatum().get(Calendar.DAY_OF_WEEK) > 1 && feiertag.getDatum().get(Calendar.DAY_OF_WEEK) < 7) {
 				Brueckentag brueckentag = new Brueckentag(feiertag);

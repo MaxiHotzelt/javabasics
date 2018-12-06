@@ -6,11 +6,11 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Feiertagsliste {
+public class ListeAllerFeiertage {
 	
 	private ArrayList<Feiertag> alleFeiertage = new ArrayList<Feiertag>();
 	
-	public Feiertagsliste(int jahr) {
+	public ListeAllerFeiertage(int jahr) {
 		feiertagslisteAnlegen(jahr);
 	}
 	
@@ -66,7 +66,7 @@ public class Feiertagsliste {
 		alleFeiertage.add(neujahr);
 		Feiertag dreiKoenige = new Feiertag(6, 1, jahr,"Heilige Drei Könige", new ArrayList<String>(Arrays.asList("Baden-Württemberg", "Bayern", "Sachsen-Anhalt")));
 		alleFeiertage.add(dreiKoenige);
-		Feiertag gruendonnerstag = new Feiertag(_gruendonnerstag,"Gründonnerstag", new ArrayList<String>(Arrays.asList("Baden-Württemberg")));
+		Feiertag gruendonnerstag = new Feiertag(_gruendonnerstag,"Gründonnerstag", new ArrayList<String>(Arrays.asList("Baden-Württemberg (für Schüler)")));
 		alleFeiertage.add(gruendonnerstag);
 		Feiertag karfreitag = new Feiertag(_karfreitag,"Karfreitag", new ArrayList<String>(Arrays.asList("Alle Bundesländer")));
 		alleFeiertage.add(karfreitag);
@@ -84,9 +84,9 @@ public class Feiertagsliste {
 		alleFeiertage.add(pfingstmontag);
 		Feiertag fronleichnam = new Feiertag(_fronleichnam,"Fronleichnam", new ArrayList<String>(Arrays.asList("Baden-Württemberg", "Bayern", "Hessen", "Nordrhein-Westfahlen", "Rheinland-Pfalz", "Saarland")));
 		alleFeiertage.add(fronleichnam);
-		Feiertag friedensfest = new Feiertag(8, 8, jahr,"Augsburger Hohes Fest", new ArrayList<String>(Arrays.asList("Bayern")));
+		Feiertag friedensfest = new Feiertag(8, 8, jahr,"Augsburger Hohes Fest", new ArrayList<String>(Arrays.asList("Bayern (nur in Augsburg)")));
 		alleFeiertage.add(friedensfest);
-		Feiertag mariaeHimmelfahrt = new Feiertag(15, 8, jahr,"Mariä Himmelfahrt", new ArrayList<String>(Arrays.asList("Bayern", "Saarland")));
+		Feiertag mariaeHimmelfahrt = new Feiertag(15, 8, jahr,"Mariä Himmelfahrt", new ArrayList<String>(Arrays.asList("Bayern (in katholischen Gemeinden)", "Saarland")));
 		alleFeiertage.add(mariaeHimmelfahrt);
 		Feiertag deutscheEinheit = new Feiertag(3, 10, jahr,"Tag der Deutschen Einheit", new ArrayList<String>(Arrays.asList("Alle Bundesländer")));
 		alleFeiertage.add(deutscheEinheit);
@@ -94,7 +94,7 @@ public class Feiertagsliste {
 		alleFeiertage.add(reformation);
 		Feiertag allerheiligen = new Feiertag(1, 11, jahr,"Allerheiligen", new ArrayList<String>(Arrays.asList("Baden-Württemberg", "Bayern", "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland")));
 		alleFeiertage.add(allerheiligen);
-		Feiertag bussundbettag = new Feiertag(_bussUndBettag,"Buß- und Bettag", new ArrayList<String>(Arrays.asList("Sachsen")));
+		Feiertag bussundbettag = new Feiertag(_bussUndBettag,"Buß- und Bettag", new ArrayList<String>(Arrays.asList("Bayern (für Schüler)", "Sachsen")));
 		alleFeiertage.add(bussundbettag);
 		Feiertag ersterWeihnachtstag = new Feiertag(25, 12, jahr,"1. Weihnachtstag", new ArrayList<String>(Arrays.asList("Alle Bundesländer")));
 		alleFeiertage.add(ersterWeihnachtstag);
