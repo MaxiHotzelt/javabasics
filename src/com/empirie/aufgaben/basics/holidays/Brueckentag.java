@@ -1,5 +1,6 @@
 package com.empirie.aufgaben.basics.holidays;
 
+import java.text.MessageFormat;
 import java.util.GregorianCalendar;
 
 /**
@@ -19,5 +20,25 @@ public class Brueckentag extends Feiertag  {
 	public int getKalenderwoche() {
 		return kalenderwoche;
 	}	
+	
+	@Override
+		public void ausgeben() {
+			// TODO Auto-generated method stub
+			super.ausgeben();
+			System.out.println("brueckentag");
+			
+			
+		}
+
+	@Override
+	public String getCsvEintrag(int stelleAnListe) {
+		
+		String currentText = super.getCsvEintrag(stelleAnListe);
+		
+		StringBuilder textFuerCSVDatei = new StringBuilder(currentText);
+		textFuerCSVDatei.append(MessageFormat.format("\r\nKalenderwoche;{0}", this.getKalenderwoche()));
+		
+		return textFuerCSVDatei.toString();
+	}
 	
 }

@@ -2,6 +2,7 @@ package com.empirie.aufgaben.basics.holidays;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 /**
@@ -30,7 +31,6 @@ public class ListeAllerKalenderwochenMitBrueckentagen {
 				KalenderwocheMitBrueckentagen brueckentagkalenderwoche = new KalenderwocheMitBrueckentagen(alleBrueckentage.get(i));
 				alleKWsMitBrueckentagen.add(brueckentagkalenderwoche);
 			}
-			
 		}
 	}
 	
@@ -72,16 +72,55 @@ public class ListeAllerKalenderwochenMitBrueckentagen {
 				}
 				
 				System.out.println("\n");
-			}
-			
-			
-			
-			
-		}
+			}	
+		}	
+	}
+	
+public void listeAllerKalenderwochenMitBrueckentagenExportieren()  {
+		@SuppressWarnings("resource")
+		Scanner sc = new Scanner(System.in);
+		String dateiName = System.getProperty("user.home") + "/Desktop/csv/";
+	
+		System.out.print("Gib den Dateinamen an: ");
+		dateiName = dateiName.concat(sc.nextLine() + "kalenderwochenMitBrueckentag.csv");
 		
 		
+		CSVUtils csvDatei = new CSVUtils(dateiName);
 		
+		java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd.MM.yyyy");
+		java.text.SimpleDateFormat dateFormatYear = new java.text.SimpleDateFormat("yyyy");
+		java.text.SimpleDateFormat dateFormatDay = new java.text.SimpleDateFormat("EEEE");
 		
+		csvDatei.schreibeText(MessageFormat.format("--- Kalenderwochen mit Brückentagen für das Jahr {0} ---", 
+				dateFormatYear.format(alleKWsMitBrueckentagen.get(0).getBrueckentageInKalenderwoche().get(0).getDatum().getTime())));
+		
+		for(int i = 0; i < alleKWsMitBrueckentagen.size(); i++) {
+			csvDatei.schreibeText(MessageFormat.format("\r\n\n------- Kalenderwoche {0} -------", alleKWsMitBrueckentagen.get(i).getKalenderwoche()));
+			csvDatei.schreibeText(MessageFormat.format("\r\nArbeitstage;{0}", alleKWsMitBrueckentagen.get(i).getArbeitstage()));
+			csvDatei.schreibeText(MessageFormat.format("\r\nFreie Tage;{0}", alleKWsMitBrueckentagen.get(i).getFreieTage()));
+			csvDatei.schreibeText(MessageFormat.format("\r\nUrlaubseffizienz;{0}%", alleKWsMitBrueckentagen.get(i).urlaubseffizienzBerechnen()));
+			
+
+			for(int j = 0; j < alleKWsMitBrueckentagen.get(i).getBrueckentageInKalenderwoche().size(); j++) {
+				csvDatei.schreibeText(MessageFormat.format("\r\n\nFeiertag {0}:", j+1));
+				csvDatei.schreibeText(MessageFormat.format("\r\nName;{0}", alleKWsMitBrueckentagen.get(i).getBrueckentageInKalenderwoche().get(j).getName()));
+				csvDatei.schreibeText(MessageFormat.format("\r\nDatum;{0}", dateFormat.format(alleKWsMitBrueckentagen.get(i).getBrueckentageInKalenderwoche().get(j).getDatum().getTime())));
+				csvDatei.schreibeText(MessageFormat.format("\r\nWochentag;{0}", dateFormatDay.format(alleKWsMitBrueckentagen.get(i).getBrueckentageInKalenderwoche().get(j).getDatum().getTime())));
+				
+				csvDatei.schreibeText("\r\nBrueckentage;");
+				for(int l = 0; l < alleKWsMitBrueckentagen.get(i).getBrueckentageInKalenderwoche().get(j).getBundeslenader().size(); l++) {
+					if(l+1 == alleKWsMitBrueckentagen.get(i).getBrueckentageInKalenderwoche().get(j).getBundeslenader().size()) {
+						csvDatei.schreibeText(alleKWsMitBrueckentagen.get(i).getBrueckentageInKalenderwoche().get(j).getBundeslenader().get(l));
+					} else {
+						csvDatei.schreibeText(alleKWsMitBrueckentagen.get(i).getBrueckentageInKalenderwoche().get(j).getBundeslenader().get(l) + ";");
+					}
+				
+				}
+			}	
+		}	
+		
+		csvDatei.beendeCSV();
+		csvDatei = null;
 	}
 	
 }

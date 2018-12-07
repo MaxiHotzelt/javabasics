@@ -3,6 +3,7 @@ package com.empirie.aufgaben.basics.holidays;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Scanner;
 
 /**
  * 
@@ -13,7 +14,7 @@ public class ListeAllerBrueckentage {
 	
 	private  ArrayList<Brueckentag> alleBrueckentage = new ArrayList<Brueckentag>();
 	
-	public ListeAllerBrueckentage(ListeAllerFeiertage alleFeiertage) {
+	public ListeAllerBrueckentage(HolidayArrayList alleFeiertage) {
 		brueckentagslisteAnlegen(alleFeiertage);
 	}
 	
@@ -21,11 +22,10 @@ public class ListeAllerBrueckentage {
 		return alleBrueckentage;
 	}
 	
-	private void brueckentagslisteAnlegen(ListeAllerFeiertage alleFeiertage) {
-		for (Feiertag feiertag : alleFeiertage.getFeiertage()) {
+	private void brueckentagslisteAnlegen(HolidayArrayList alleFeiertage) {
+		for (Feiertag feiertag : alleFeiertage) {
 			if(feiertag.getDatum().get(Calendar.DAY_OF_WEEK) > 1 && feiertag.getDatum().get(Calendar.DAY_OF_WEEK) < 7) {
-				Brueckentag brueckentag = new Brueckentag(feiertag);
-				alleBrueckentage.add(brueckentag);
+				alleBrueckentage.add(new Brueckentag(feiertag));
 			}
 		}
 	}
@@ -34,7 +34,6 @@ public class ListeAllerBrueckentage {
 		java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd.MM.yyyy");
 		java.text.SimpleDateFormat dateFormatYear = new java.text.SimpleDateFormat("yyyy");
 		java.text.SimpleDateFormat dateFormatDay = new java.text.SimpleDateFormat("EEEE");
-		
 		
 		System.out.println(MessageFormat.format("\n--- Brückentage für das Jahr {0} ---", 
 				dateFormatYear.format(alleBrueckentage.get(0).getDatum().getTime())));
@@ -65,6 +64,45 @@ public class ListeAllerBrueckentage {
 			
 			System.out.println("\n");
 		}
+	}
+	
+	public void brueckentageExportieren()  {
+		@SuppressWarnings("resource")
+		Scanner sc = new Scanner(System.in);
+		String dateiName = System.getProperty("user.home") + "/Desktop/csv/";
+
+		System.out.print("Gib den Dateinamen an: ");
+		dateiName = dateiName.concat(sc.nextLine() + "brueckentage.csv");
+		
+		
+		CSVUtils csvDatei = new CSVUtils(dateiName);
+		
+		
+		java.text.SimpleDateFormat dateFormatYear = new java.text.SimpleDateFormat("yyyy");
+		
+		
+		csvDatei.schreibeText(MessageFormat.format("--- Brückentage für das Jahr {0} ---", 
+						dateFormatYear.format(alleBrueckentage.get(0).getDatum().getTime())));
+		
+		
+		
+		for(int i = 0; i < alleBrueckentage.size(); i++) {
+			csvDatei.schreibeText(alleBrueckentage.get(i).getCsvEintrag(i + 1));
+			csvDatei.schreibeText("\r\nBundesland;");
+			
+			for(int j = 0; j < alleBrueckentage.get(i).getBundeslenader().size(); j++) {
+				if(j+1 == alleBrueckentage.get(i).getBundeslenader().size()) {
+					csvDatei.schreibeText(alleBrueckentage.get(i).getBundeslenader().get(j));
+				} else {
+					csvDatei.schreibeText(alleBrueckentage.get(i).getBundeslenader().get(j) + ";");
+				}
+				
+			}
+			
+		}
+		csvDatei.beendeCSV();
+		
+		csvDatei = null;
 	}
 
 }

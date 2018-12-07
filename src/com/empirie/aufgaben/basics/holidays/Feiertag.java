@@ -1,5 +1,6 @@
 package com.empirie.aufgaben.basics.holidays;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -43,5 +44,23 @@ public class Feiertag {
 	public ArrayList<String> getBundeslenader() {
 		return this.bundeslaender;
 	}
+	
+	public void ausgeben() {
+		System.out.println("Datum");
+	}
+	
+	public String getCsvEintrag(int stelleAnListe) {
+		java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd.MM.yyyy");
+		java.text.SimpleDateFormat dateFormatDay = new java.text.SimpleDateFormat("EEEE");
+		
+		StringBuilder textFuerCSVDatei = new StringBuilder();
+		textFuerCSVDatei.append(MessageFormat.format("\r\n\n---------- Tag {0} ----------", stelleAnListe));
+		textFuerCSVDatei.append(MessageFormat.format("\r\nName;{0}", this.getName()));
+		textFuerCSVDatei.append(MessageFormat.format("\r\nDatum;{0}", dateFormat.format(this.getDatum().getTime())));
+		textFuerCSVDatei.append(MessageFormat.format("\r\nWochentag;{0}", dateFormatDay.format(this.getDatum().getTime())));
+		
+		return textFuerCSVDatei.toString();
+	}
+	
 		
 }

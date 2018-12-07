@@ -1,6 +1,5 @@
 package com.empirie.aufgaben.basics.holidays;
 
-import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,17 +7,19 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
-public class ListeAllerFeiertage {
+/**
+ * 
+ * @author hotzelm
+ * Liste, welche alle Feiertage bei Initialisierung bereits enthält
+ */
+public class HolidayArrayList extends ArrayList<Feiertag> {
 	
-	private ArrayList<Feiertag> alleFeiertage = new ArrayList<Feiertag>();
 	
-	public ListeAllerFeiertage(int jahr) {
+	public HolidayArrayList(int jahr) {
 		feiertagslisteAnlegen(jahr);
 	}
 	
-	public ArrayList<Feiertag> getFeiertage() {
-		return alleFeiertage;
-	}
+
 	
 	private void feiertagslisteAnlegen(int jahr) {
 		GregorianCalendar _gruendonnerstag = new GregorianCalendar();
@@ -65,43 +66,43 @@ public class ListeAllerFeiertage {
 		
 		
 		Feiertag neujahr = new Feiertag(1, 1, jahr,"Neujahrstag", new ArrayList<String>(Arrays.asList("Alle Bundesländer")));
-		alleFeiertage.add(neujahr);
+		this.add(neujahr);
 		Feiertag dreiKoenige = new Feiertag(6, 1, jahr,"Heilige Drei Könige", new ArrayList<String>(Arrays.asList("Baden-Württemberg", "Bayern", "Sachsen-Anhalt")));
-		alleFeiertage.add(dreiKoenige);
+		this.add(dreiKoenige);
 		Feiertag gruendonnerstag = new Feiertag(_gruendonnerstag,"Gründonnerstag", new ArrayList<String>(Arrays.asList("Baden-Württemberg (für Schüler)")));
-		alleFeiertage.add(gruendonnerstag);
+		this.add(gruendonnerstag);
 		Feiertag karfreitag = new Feiertag(_karfreitag,"Karfreitag", new ArrayList<String>(Arrays.asList("Alle Bundesländer")));
-		alleFeiertage.add(karfreitag);
+		this.add(karfreitag);
 		Feiertag ostersonntag = new Feiertag(_ostersonntag,"Ostersonntag", new ArrayList<String>(Arrays.asList("Brandenburg")));
-		alleFeiertage.add(ostersonntag);
+		this.add(ostersonntag);
 		Feiertag ostermontag = new Feiertag(_ostermontag,"Ostermontag", new ArrayList<String>(Arrays.asList("Alle Bundesländer")));
-		alleFeiertage.add(ostermontag);
+		this.add(ostermontag);
 		Feiertag ersterMai = new Feiertag(1, 5, jahr,"1. Mai / Tag der Arbeit", new ArrayList<String>(Arrays.asList("Alle Bundesländer")));
-		alleFeiertage.add(ersterMai);
+		this.add(ersterMai);
 		Feiertag christiHimmelfahrt = new Feiertag(_christiHimmelfahrt,"Christi-Himmelfahrt", new ArrayList<String>(Arrays.asList("Alle Bundesländer")));
-		alleFeiertage.add(christiHimmelfahrt);
+		this.add(christiHimmelfahrt);
 		Feiertag pfingstsonntag = new Feiertag(_pfingstsonntag,"Pfingstsonntag", new ArrayList<String>(Arrays.asList("Brandenburg")));
-		alleFeiertage.add(pfingstsonntag);
+		this.add(pfingstsonntag);
 		Feiertag pfingstmontag = new Feiertag(_pfingstmontag,"Pfingstmontag", new ArrayList<String>(Arrays.asList("Alle Bundesländer")));
-		alleFeiertage.add(pfingstmontag);
+		this.add(pfingstmontag);
 		Feiertag fronleichnam = new Feiertag(_fronleichnam,"Fronleichnam", new ArrayList<String>(Arrays.asList("Baden-Württemberg", "Bayern", "Hessen", "Nordrhein-Westfahlen", "Rheinland-Pfalz", "Saarland")));
-		alleFeiertage.add(fronleichnam);
+		this.add(fronleichnam);
 		Feiertag friedensfest = new Feiertag(8, 8, jahr,"Augsburger Hohes Fest", new ArrayList<String>(Arrays.asList("Bayern (nur in Augsburg)")));
-		alleFeiertage.add(friedensfest);
+		this.add(friedensfest);
 		Feiertag mariaeHimmelfahrt = new Feiertag(15, 8, jahr,"Mariä Himmelfahrt", new ArrayList<String>(Arrays.asList("Bayern (in katholischen Gemeinden)", "Saarland")));
-		alleFeiertage.add(mariaeHimmelfahrt);
+		this.add(mariaeHimmelfahrt);
 		Feiertag deutscheEinheit = new Feiertag(3, 10, jahr,"Tag der Deutschen Einheit", new ArrayList<String>(Arrays.asList("Alle Bundesländer")));
-		alleFeiertage.add(deutscheEinheit);
+		this.add(deutscheEinheit);
 		Feiertag reformation = new Feiertag(31, 10, jahr,"Reformationstag", new ArrayList<String>(Arrays.asList("Brandenburg","Bremen", "Hamburg", "Mecklenburg-Vorpommern", "Niedersachsen", "Sachsen", "Sachsen-Anhalt", "Schleswig-Holstein", "Thüringen")));
-		alleFeiertage.add(reformation);
+		this.add(reformation);
 		Feiertag allerheiligen = new Feiertag(1, 11, jahr,"Allerheiligen", new ArrayList<String>(Arrays.asList("Baden-Württemberg", "Bayern", "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland")));
-		alleFeiertage.add(allerheiligen);
+		this.add(allerheiligen);
 		Feiertag bussundbettag = new Feiertag(_bussUndBettag,"Buß- und Bettag", new ArrayList<String>(Arrays.asList("Bayern (für Schüler)", "Sachsen")));
-		alleFeiertage.add(bussundbettag);
+		this.add(bussundbettag);
 		Feiertag ersterWeihnachtstag = new Feiertag(25, 12, jahr,"1. Weihnachtstag", new ArrayList<String>(Arrays.asList("Alle Bundesländer")));
-		alleFeiertage.add(ersterWeihnachtstag);
+		this.add(ersterWeihnachtstag);
 		Feiertag zweiterWeihnachtstag = new Feiertag(26, 12, jahr,"2. Weihnachtstag", new ArrayList<String>(Arrays.asList("Alle Bundesländer")));
-		alleFeiertage.add(zweiterWeihnachtstag);
+		this.add(zweiterWeihnachtstag);
 	}
 	
 	private GregorianCalendar osterdatumBerechnen(int jahr) {
@@ -132,26 +133,30 @@ public class ListeAllerFeiertage {
 		
 		
 		System.out.println(MessageFormat.format("\n--- Feiertage für das Jahr {0} ---", 
-				dateFormatYear.format(alleFeiertage.get(0).getDatum().getTime())));
+				dateFormatYear.format(this.get(0).getDatum().getTime())));
+		
+		for(Feiertag feiertag : this) {
+			feiertag.ausgeben();
+		};
 		
 		
-		for(int i = 0; i < alleFeiertage.size(); i++) {
+		for(int i = 0; i < this.size(); i++) {
 			
 			System.out.println(MessageFormat.format(
 					"\n---------- Feiertag {0} ----------" +
 					"\n\nName		: {1}" +  
 					"\nDatum		: {2}" +
 					"\nWochentag 	: {3}", 
-					i + 1, alleFeiertage.get(i).getName(), dateFormat.format(alleFeiertage.get(i).getDatum().getTime()), dateFormatDay.format(alleFeiertage.get(i).getDatum().getTime()))
+					i + 1, this.get(i).getName(), dateFormat.format(this.get(i).getDatum().getTime()), dateFormatDay.format(this.get(i).getDatum().getTime()))
 			);
 			
 			System.out.print("Bundesland	: ");
 			
-			for(int j = 0; j < alleFeiertage.get(i).getBundeslenader().size(); j++) {
-				if(j+1 == alleFeiertage.get(i).getBundeslenader().size()) {
-					System.out.print(alleFeiertage.get(i).getBundeslenader().get(j));
+			for(int j = 0; j < this.get(i).getBundeslenader().size(); j++) {
+				if(j+1 == this.get(i).getBundeslenader().size()) {
+					System.out.print(this.get(i).getBundeslenader().get(j));
 				} else {
-					System.out.print(alleFeiertage.get(i).getBundeslenader().get(j) + ", ");
+					System.out.print(this.get(i).getBundeslenader().get(j) + ", ");
 				}
 				
 			}
@@ -161,43 +166,35 @@ public class ListeAllerFeiertage {
 	}
 	
 	
-	public void feiertageExportieren() throws IOException {
+	public void feiertageExportieren() {
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
-		String dateiName = System.getProperty("user.home") + "/Desktop/";
+		String dateiName = System.getProperty("user.home") + "/Desktop/csv/";
 
 		System.out.print("Gib den Dateinamen an: ");
-		dateiName = dateiName.concat(sc.nextLine() + ".csv");
+		dateiName = dateiName.concat(sc.nextLine() + "feiertage.csv");
 		
 		
 		CSVUtils csvDatei = new CSVUtils(dateiName);
 		
-		java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd.MM.yyyy");
 		java.text.SimpleDateFormat dateFormatYear = new java.text.SimpleDateFormat("yyyy");
-		java.text.SimpleDateFormat dateFormatDay = new java.text.SimpleDateFormat("EEEE");
-		
-		System.out.println(MessageFormat.format("--- Feiertage für das Jahr {0} ---", 
-				dateFormatYear.format(alleFeiertage.get(0).getDatum().getTime())));
 		
 		csvDatei.schreibeText(MessageFormat.format("--- Feiertage für das Jahr {0} ---", 
-				dateFormatYear.format(alleFeiertage.get(0).getDatum().getTime())));
+				dateFormatYear.format(this.get(0).getDatum().getTime())));
 		
 		
 		
-		for(int i = 0; i < alleFeiertage.size(); i++) {
-			
-			csvDatei.schreibeText(MessageFormat.format("\r\n---------- Feiertag {0} ----------", i + 1));
-			csvDatei.schreibeText(MessageFormat.format("\r\n\nName;{0}", alleFeiertage.get(i).getName()));
-			csvDatei.schreibeText(MessageFormat.format("\r\nDatum;{0}", dateFormat.format(alleFeiertage.get(i).getDatum().getTime())));
-			csvDatei.schreibeText(MessageFormat.format("\r\nWochentag;{0}", dateFormatDay.format(alleFeiertage.get(i).getDatum().getTime())));
+		for(int i = 0; i < this.size(); i++) {
+			csvDatei.schreibeText(this.get(i).getCsvEintrag(i +1));
 			
 			
 			csvDatei.schreibeText("\r\nBundesland;");
 			
-			for(int j = 0; j < alleFeiertage.get(i).getBundeslenader().size(); j++) {
-				if(j+1 == alleFeiertage.get(i).getBundeslenader().size()) {
-					csvDatei.schreibeText(alleFeiertage.get(i).getBundeslenader().get(j));
+			for(int j = 0; j < this.get(i).getBundeslenader().size(); j++) {
+				if(j+1 == this.get(i).getBundeslenader().size()) {
+					csvDatei.schreibeText(this.get(i).getBundeslenader().get(j));
 				} else {
-					csvDatei.schreibeText(alleFeiertage.get(i).getBundeslenader().get(j) + ";");
+					csvDatei.schreibeText(this.get(i).getBundeslenader().get(j) + ";");
 				}
 				
 			}

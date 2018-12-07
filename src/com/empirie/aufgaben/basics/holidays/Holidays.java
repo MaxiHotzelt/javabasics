@@ -1,21 +1,20 @@
 package com.empirie.aufgaben.basics.holidays;
 
-import java.io.IOException;
 import java.util.Scanner;
 
-public class Main {
+public class Holidays {
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		
-		hauptmenu();
+		
+		new Holidays().hauptmenu();
 		//test();
 
-		
 	}
 	
-	private static void hauptmenu() throws IOException {
+	private void hauptmenu()  {
 		Scanner sc = new Scanner(System.in);
-		ListeAllerFeiertage feiertage;
+		HolidayArrayList feiertage;
 		ListeAllerBrueckentage brueckentage;
 		int option = 1; 
 		int jahr;
@@ -45,48 +44,48 @@ public class Main {
 					System.out.print("\nAuswahl: ");		
 					dateiAlsCSVExportieren = sc.nextLine();
 					
-					feiertage = new ListeAllerFeiertage(jahr);
+					feiertage = new HolidayArrayList(jahr);
 					if(dateiAlsCSVExportieren.equals("y")) {
 						feiertage.feiertageExportieren();
 					}
 					feiertage.feiertageAusgeben();
 					
-					feiertage = null;
 					break;
 				case 2:
 					System.out.print("\n\n----- Brückentage ausgeben -----\n\n"
 							+ "Wähle ein Jahr: ");
 					jahr = Integer.parseInt(sc.nextLine());
-					sc.nextLine();
 					
-					System.out.print("\nDatei als CSV exportieren? (y/n)");
+					System.out.println("\nDatei als CSV exportieren? (y/n)");
+					System.out.print("\nAuswahl: ");		
 					dateiAlsCSVExportieren = sc.nextLine();
+					feiertage = new HolidayArrayList(jahr);
+					brueckentage = new ListeAllerBrueckentage(feiertage);
 					if(dateiAlsCSVExportieren.equals("y")) {
+						brueckentage.brueckentageExportieren();
 					}
 					
-					feiertage = new ListeAllerFeiertage(jahr);
-					brueckentage = new ListeAllerBrueckentage(feiertage);
 					brueckentage.brueckentageAusgeben();
 					
-					brueckentage = null;
 					break;
 				case 3:
 					System.out.print("\n\n----- Urlaubseffizienz ausgeben -----\n\n"
 							+ "Wähle ein Jahr: ");
 					jahr = Integer.parseInt(sc.nextLine());
 					
-					System.out.print("\nDatei als CSV exportieren? (y/n)");
+					System.out.println("\nDatei als CSV exportieren? (y/n)");
+					System.out.print("\nAuswahl: ");		
 					dateiAlsCSVExportieren = sc.nextLine();
-					if(dateiAlsCSVExportieren.equals("y")) {
-						
-					}
 					
-					feiertage = new ListeAllerFeiertage(jahr);
+					feiertage = new HolidayArrayList(jahr);
 					brueckentage = new ListeAllerBrueckentage(feiertage);
 					ListeAllerKalenderwochenMitBrueckentagen brueckentagsKWListe = new ListeAllerKalenderwochenMitBrueckentagen(brueckentage.getAlleBrueckentage());
+					if(dateiAlsCSVExportieren.equals("y")) {
+						brueckentagsKWListe.listeAllerKalenderwochenMitBrueckentagenExportieren();
+					}
+					
 					brueckentagsKWListe.listeAllerKalenderwochenMitBrueckentagenAusgeben();
 					
-					brueckentagsKWListe = null;
 					break;
 				case 4:
 					break;
@@ -100,7 +99,7 @@ public class Main {
 	}
 	
 	private static void test() {
-		ListeAllerFeiertage feiertage2018 = new ListeAllerFeiertage(2018);
+		HolidayArrayList feiertage2018 = new HolidayArrayList(2018);
 		feiertage2018.feiertageAusgeben();
 		
 		ListeAllerBrueckentage brueckentage2018 = new ListeAllerBrueckentage(feiertage2018);
