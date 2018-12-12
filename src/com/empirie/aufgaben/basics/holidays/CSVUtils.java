@@ -24,19 +24,14 @@ public class CSVUtils {
 		    try {
 		    	this.writer = new PrintWriter(new OutputStreamWriter(os, "UTF-8"));
 		    } catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				System.out.println("Das gewünschte Encoding konnte nicht gefunden werden.");
 				this.writer = new PrintWriter(new OutputStreamWriter(os));
 				
 			} 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Datei konnte nicht erstellt werden.");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			System.out.println("Konstruktor Ende");
 		}
 		
 	}
@@ -58,7 +53,6 @@ public class CSVUtils {
 		writer.close();
 		
 		writer = null;
-		
 	}
 
 	public void schreibeText(String text) {
@@ -68,8 +62,6 @@ public class CSVUtils {
 	public void schreibeFeiertag(Feiertag tag) {
 		
 	}
-	
-	
 	
 	public void neueZeile()  {
 		writer.print("\r\n");

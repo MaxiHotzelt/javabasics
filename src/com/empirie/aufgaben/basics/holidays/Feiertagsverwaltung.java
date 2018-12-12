@@ -2,20 +2,20 @@ package com.empirie.aufgaben.basics.holidays;
 
 import java.util.Scanner;
 
-public class Holidays {
+public class Feiertagsverwaltung {
 	
 	public static void main(String[] args) {
 		
 		
-		new Holidays().hauptmenu();
+		new Feiertagsverwaltung().hauptmenu();
 		//test();
 
 	}
 	
 	private void hauptmenu()  {
 		Scanner sc = new Scanner(System.in);
-		HolidayArrayList feiertage;
-		ListeAllerBrueckentage brueckentage;
+		FeiertagArrayList feiertage;
+		BrueckentageArrayList brueckentage;
 		int option = 1; 
 		int jahr;
 		
@@ -44,7 +44,7 @@ public class Holidays {
 					System.out.print("\nAuswahl: ");		
 					dateiAlsCSVExportieren = sc.nextLine();
 					
-					feiertage = new HolidayArrayList(jahr);
+					feiertage = new FeiertagArrayList(jahr);
 					if(dateiAlsCSVExportieren.equals("y")) {
 						feiertage.feiertageExportieren();
 					}
@@ -59,8 +59,8 @@ public class Holidays {
 					System.out.println("\nDatei als CSV exportieren? (y/n)");
 					System.out.print("\nAuswahl: ");		
 					dateiAlsCSVExportieren = sc.nextLine();
-					feiertage = new HolidayArrayList(jahr);
-					brueckentage = new ListeAllerBrueckentage(feiertage);
+					feiertage = new FeiertagArrayList(jahr);
+					brueckentage = new BrueckentageArrayList(feiertage);
 					if(dateiAlsCSVExportieren.equals("y")) {
 						brueckentage.brueckentageExportieren();
 					}
@@ -77,9 +77,9 @@ public class Holidays {
 					System.out.print("\nAuswahl: ");		
 					dateiAlsCSVExportieren = sc.nextLine();
 					
-					feiertage = new HolidayArrayList(jahr);
-					brueckentage = new ListeAllerBrueckentage(feiertage);
-					ListeAllerKalenderwochenMitBrueckentagen brueckentagsKWListe = new ListeAllerKalenderwochenMitBrueckentagen(brueckentage.getAlleBrueckentage());
+					feiertage = new FeiertagArrayList(jahr);
+					brueckentage = new BrueckentageArrayList(feiertage);
+					KWsMitBrueckentagenArrayList brueckentagsKWListe = new KWsMitBrueckentagenArrayList(brueckentage);
 					if(dateiAlsCSVExportieren.equals("y")) {
 						brueckentagsKWListe.listeAllerKalenderwochenMitBrueckentagenExportieren();
 					}
@@ -98,13 +98,14 @@ public class Holidays {
 		sc.close();
 	}
 	
+	@SuppressWarnings("unused")
 	private static void test() {
-		HolidayArrayList feiertage2018 = new HolidayArrayList(2018);
+		FeiertagArrayList feiertage2018 = new FeiertagArrayList(2018);
 		feiertage2018.feiertageAusgeben();
 		
-		ListeAllerBrueckentage brueckentage2018 = new ListeAllerBrueckentage(feiertage2018);
+		BrueckentageArrayList brueckentage2018 = new BrueckentageArrayList(feiertage2018);
 		brueckentage2018.brueckentageAusgeben();
-		ListeAllerKalenderwochenMitBrueckentagen brueckentagsKWListe = new ListeAllerKalenderwochenMitBrueckentagen(brueckentage2018.getAlleBrueckentage());
+		KWsMitBrueckentagenArrayList brueckentagsKWListe = new KWsMitBrueckentagenArrayList(brueckentage2018);
 		brueckentagsKWListe.listeAllerKalenderwochenMitBrueckentagenAusgeben();;
 	}
 }

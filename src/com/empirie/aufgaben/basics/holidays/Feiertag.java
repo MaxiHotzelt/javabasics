@@ -45,21 +45,56 @@ public class Feiertag {
 		return this.bundeslaender;
 	}
 	
-	public void ausgeben() {
-		System.out.println("Datum");
+	public void tagAusgeben() {
+		java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd.MM.yyyy");
+		java.text.SimpleDateFormat dateFormatDay = new java.text.SimpleDateFormat("EEEE");
+		
+		System.out.println("\n---------- Feiertag ----------");
+		System.out.println(MessageFormat.format(
+				
+				"\n\nName		: {0}" +  
+				"\nDatum		: {1}" +
+				"\nWochentag 	: {2}", 
+				this.getName(), dateFormat.format(this.getDatum().getTime()), dateFormatDay.format(this.getDatum().getTime()))
+		);
+		
+
+		System.out.print("Bundesland	: ");
+		
+		for(int j = 0; j < this.getBundeslenader().size(); j++) {
+			if(j+1 == this.getBundeslenader().size()) {
+				System.out.print(this.getBundeslenader().get(j));
+			} else {
+				System.out.print(this.getBundeslenader().get(j) + ", ");
+			}
+			
+		}
+		
+		System.out.println("\n");
 	}
 	
-	public String getCsvEintrag(int stelleAnListe) {
+	public String getCsvEintrag() {
 		java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd.MM.yyyy");
 		java.text.SimpleDateFormat dateFormatDay = new java.text.SimpleDateFormat("EEEE");
 		
 		StringBuilder textFuerCSVDatei = new StringBuilder();
-		textFuerCSVDatei.append(MessageFormat.format("\r\n\n---------- Tag {0} ----------", stelleAnListe));
+		textFuerCSVDatei.append("\r\n\n---------- Feiertag ----------");
 		textFuerCSVDatei.append(MessageFormat.format("\r\nName;{0}", this.getName()));
 		textFuerCSVDatei.append(MessageFormat.format("\r\nDatum;{0}", dateFormat.format(this.getDatum().getTime())));
 		textFuerCSVDatei.append(MessageFormat.format("\r\nWochentag;{0}", dateFormatDay.format(this.getDatum().getTime())));
 		
+		textFuerCSVDatei.append("\r\nBundesland;");
+		
+		for(int j = 0; j < this.getBundeslenader().size(); j++) {
+			if(j+1 == this.getBundeslenader().size()) {
+				textFuerCSVDatei.append(this.getBundeslenader().get(j));
+			} else {
+				textFuerCSVDatei.append(this.getBundeslenader().get(j) + ";");			
+			}
+		}
+		
 		return textFuerCSVDatei.toString();
+	
 	}
 	
 		
