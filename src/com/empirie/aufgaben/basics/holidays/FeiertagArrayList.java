@@ -15,12 +15,9 @@ import java.util.Scanner;
 @SuppressWarnings("serial")
 public class FeiertagArrayList extends ArrayList<Feiertag> {
 
-
 	public FeiertagArrayList(int jahr) {
 		feiertagslisteAnlegen(jahr);
 	}
-	
-
 	
 	private void feiertagslisteAnlegen(int jahr) {
 		GregorianCalendar gruendonnerstag = new GregorianCalendar();
@@ -65,8 +62,7 @@ public class FeiertagArrayList extends ArrayList<Feiertag> {
 		}
 		
 		
-		
-		this.add(new Feiertag(1, 1, jahr,"Neujahrstag", new ArrayList<String>(Arrays.asList("Alle Bundesländer"))));
+		this.add(new Feiertag(1, 1, jahr,"Neujahrstag", Bundeslaender.Bayern.getBundeslaender("Neujahrstag")));
 		this.add(new Feiertag(6, 1, jahr,"Heilige Drei Könige", new ArrayList<String>(Arrays.asList("Baden-Württemberg", "Bayern", "Sachsen-Anhalt"))));
 		this.add(new Feiertag(gruendonnerstag,"Gründonnerstag", new ArrayList<String>(Arrays.asList("Baden-Württemberg (für Schüler)"))));
 		this.add(new Feiertag(karfreitag,"Karfreitag", new ArrayList<String>(Arrays.asList("Alle Bundesländer"))));
@@ -115,12 +111,10 @@ public class FeiertagArrayList extends ArrayList<Feiertag> {
 				dateFormatYear.format(this.get(0).getDatum().getTime())));
 		
 		for(Feiertag feiertag : this) {
-			feiertag.tagAusgeben();
+			feiertag.tagAusgeben(true);
 		}
 	}
 	
-	
-	@SuppressWarnings("resource")
 	public void feiertageExportieren() {
 		Scanner sc = new Scanner(System.in);
 		String dateiName = System.getProperty("user.home") + "/Desktop/csv/";
@@ -130,15 +124,16 @@ public class FeiertagArrayList extends ArrayList<Feiertag> {
 		
 		CSVUtils csvDatei = new CSVUtils(dateiName);
 		
+		
 		java.text.SimpleDateFormat dateFormatYear = new java.text.SimpleDateFormat("yyyy");
 		csvDatei.schreibeText(MessageFormat.format("--- Feiertage für das Jahr {0} ---", 
-				dateFormatYear.format(this.get(0).getDatum().getTime())));
-		
+						dateFormatYear.format(this.get(0).getDatum().getTime())));
 		for(int i = 0; i < this.size(); i++) {
-			csvDatei.schreibeText(this.get(i).getCsvEintrag());
+			csvDatei.schreibeText(this.get(i).getCSVEintrag(true));
+			
 		}
 		
-		csvDatei.beendeCSV();	
+		csvDatei.beendeCSV();
 		csvDatei = null;
 	}
 }
